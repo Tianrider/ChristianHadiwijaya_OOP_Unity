@@ -4,19 +4,22 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    [SerializeField] Vector2 maxSpeed = new Vector2(5f, 5f); // Default value
-    [SerializeField] Vector2 timeToFullSpeed = new Vector2(0.5f, 0.5f); // Default value
-    [SerializeField] Vector2 timeToStop = new Vector2(0.3f, 0.3f); // Default value
-    [SerializeField] Vector2 stopClamp = new Vector2(0.1f, 0.1f); // Default value
-
+    [SerializeField] private GameObject cameraBoundsObject;
+    private BoxCollider2D cameraBoundsCollider;
+    [SerializeField] Vector2 maxSpeed = new Vector2(5f, 5f);
+    [SerializeField] Vector2 timeToFullSpeed = new Vector2(0.5f, 0.5f);
+    [SerializeField] Vector2 timeToStop = new Vector2(0.3f, 0.3f);
+    [SerializeField] Vector2 stopClamp = new Vector2(0.1f, 0.1f);
     Vector2 moveDirection;
     Vector2 moveVelocity;
     Vector2 moveFriction;
     Vector2 stopFriction;
     Rigidbody2D rb;
 
-    // Start is called before the first frame update
-void Start()
+    [SerializeField] GameObject portal;
+
+
+    void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         if (rb == null)
@@ -25,67 +28,94 @@ void Start()
             return;
         }
 
-        // Configure Rigidbody2D
-        rb.gravityScale = 0f; // Disable gravity for top-down movement
-        rb.constraints = RigidbodyConstraints2D.FreezeRotation; // Prevent rotation
+        cameraBoundsCollider = cameraBoundsObject.GetComponent<BoxCollider2D>();
+        if (cameraBoundsCollider == null)
+        {
+            Debug.LogError("CameraBounds object does not have a BoxCollider2D component!");
+            return;
+        }
 
-        // Initial calculations for movement variables
-        moveVelocity = maxSpeed / timeToFullSpeed;
-        moveFriction = maxSpeed / timeToStop;
-        stopFriction = stopClamp / timeToStop;
+        moveVelocity = 2 * maxSpeed / timeToFullSpeed;
+        moveFriction = -2 * maxSpeed / timeToStop * timeToStop;
+        stopFriction = -2 * maxSpeed / timeToStop * timeToStop;
 
         Debug.Log($"Movement initialized with maxSpeed: {maxSpeed}, moveVelocity: {moveVelocity}");
+
+        portal.SetActive(false);
     }
 
     public void move()
     {
-        // Getting player input
-        moveDirection = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
-        
-        Debug.Log($"Input: {moveDirection}, Current Velocity: {rb.velocity}");
+        // Clamp input values between -1 and 1
+        float horizontalInput = Mathf.Clamp(Input.GetAxisRaw("Horizontal"), -1f, 1f);
+        float verticalInput = Mathf.Clamp(Input.GetAxisRaw("Vertical"), -1f, 1f);
+        moveDirection = new Vector2(horizontalInput, verticalInput);
 
-        if (moveDirection != Vector2.zero)
+        // Debug.Log($"Input: {moveDirection}, Current Velocity: {rb.velocity}");
+
+        if (moveDirection.sqrMagnitude > 0.01f)
         {
-            // Normalize the movement direction for consistent speed in all directions
             moveDirection.Normalize();
 
-            // Calculate target velocity
             Vector2 targetVelocity = new Vector2(
                 moveDirection.x * maxSpeed.x,
                 moveDirection.y * maxSpeed.y
             );
 
-            // Smoothly move towards target velocity
             rb.velocity = Vector2.MoveTowards(
                 rb.velocity,
                 targetVelocity,
-                moveVelocity.magnitude * Time.fixedDeltaTime
+                GetFriction().magnitude * Time.fixedDeltaTime
             );
         }
         else
         {
-            // Stop more quickly when no input
             rb.velocity = Vector2.MoveTowards(
                 rb.velocity,
                 Vector2.zero,
-                stopFriction.magnitude * Time.fixedDeltaTime
+                GetFriction().magnitude * Time.fixedDeltaTime
             );
+
+            if (rb.velocity.magnitude < stopClamp.magnitude)
+            {
+                rb.velocity = Vector2.zero;
+            }
         }
+
+        MoveBound();
     }
 
     public bool isMoving()
     {
         return rb.velocity.sqrMagnitude > 0.01f;
-    }    
-    
-    public Vector2 GetFriction() 
+    }
+
+    public Vector2 GetFriction()
     {
-        // Choose appropriate friction based on movement
         return (moveDirection != Vector2.zero) ? moveFriction : stopFriction;
     }
 
     public void MoveBound()
     {
-        // Leave empty for now as instructed
+        // applied small offset
+        float minX = cameraBoundsCollider.bounds.min.x + (float)0.6;
+        float maxX = cameraBoundsCollider.bounds.max.x - (float)0.6;
+        float minY = cameraBoundsCollider.bounds.min.y;
+        float maxY = cameraBoundsCollider.bounds.max.y - (float)1.5;
+
+        // Clamp the player's position within the camera bounds
+        rb.position = new Vector2(
+            Mathf.Clamp(rb.position.x, minX, maxX),
+            Mathf.Clamp(rb.position.y, minY, maxY)
+        );
+    }
+
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("WeaponPickup"))
+        {
+            Debug.Log("Player entered weapon pickup");
+            portal.SetActive(true);
+        }
     }
 }

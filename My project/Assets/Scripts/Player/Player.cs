@@ -21,18 +21,15 @@ public class Player : MonoBehaviour
         }
     }
 
-
-    // Start is called before the first frame update
     void Start()
     {
         playerMovement = GetComponent<PlayerMovement>();
         animator = GameObject.Find("EngineEffect").GetComponent<Animator>();   
     }
 
-    // Update is called once per frame
     void FixedUpdate()
     {
-        playerMovement.move();
+            playerMovement.move();
     }
 
     void LateUpdate() 
