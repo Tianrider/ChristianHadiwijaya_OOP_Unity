@@ -1,42 +1,47 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(SpriteRenderer))]
-[RequireComponent(typeof(HitboxComponent))]
+[RequireComponent(typeof(SpriteRenderer)), RequireComponent(typeof(HitboxComponent))]
 public class InvincibilityComponent : MonoBehaviour
 {
     [SerializeField] private int blinkingCount = 7;
     [SerializeField] private float blinkInterval = 0.1f;
     [SerializeField] private Material blinkMaterial;
-    [SerializeField] private Material redFlashMaterial;
 
     private SpriteRenderer spriteRenderer;
     private Material originalMaterial;
+
     public bool isInvincible = false;
 
     // Start is called before the first frame update
-    void Start()
+    private void Awake()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
         originalMaterial = spriteRenderer.material;
     }
 
-    private IEnumerator Blink()
+    public void TriggerInvincibility()
     {
+        if (!isInvincible)
+        {
+            StartCoroutine(InvincibilityCoroutine());
+        }
+    }
+
+    private IEnumerator InvincibilityCoroutine()
+    {
+        isInvincible = true;
+
         for (int i = 0; i < blinkingCount; i++)
         {
             spriteRenderer.material = blinkMaterial;
-            yield return new WaitForSeconds(blinkInterval);
+            yield return new WaitForSeconds(blinkInterval / 2);
             spriteRenderer.material = originalMaterial;
-            yield return new WaitForSeconds(blinkInterval);
+            yield return new WaitForSeconds(blinkInterval / 2);
         }
-        isInvincible = false;
-    }
 
-    public void StartInvincibility()
-    {
-        isInvincible = true;
-        StartCoroutine(Blink());
+        spriteRenderer.material = originalMaterial;
+
+        isInvincible = false;
     }
 }

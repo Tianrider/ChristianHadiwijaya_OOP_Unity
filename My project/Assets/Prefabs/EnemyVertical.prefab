@@ -19,7 +19,7 @@ GameObject:
   - component: {fileID: -5024208827905616545}
   m_Layer: 0
   m_Name: EnemyVertical
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -64,7 +64,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd83254e2aa851049b271d082c750f1f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  level: 1
+  level: 2
+  enemySpawner: {fileID: 2122342843909837203, guid: b3284262753f08d41b4d6a7ce6b4df05, type: 3}
 --- !u!114 &-1538891793401722409
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -103,7 +104,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4805da751fe84674ba52f28654286201, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  level: 1
+  level: 2
+  enemySpawner: {fileID: 2122342843909837203, guid: b3284262753f08d41b4d6a7ce6b4df05, type: 3}
   speed: 2
 --- !u!50 &8124718428659860164
 Rigidbody2D:
@@ -213,7 +215,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0.4236111}

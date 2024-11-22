@@ -18,7 +18,7 @@ public class HealthComponent : MonoBehaviour
         return health;
     }
 
-    public void subtract(int damage)
+    public void Subtract(int damage)
     {
         health -= damage;
         if (health <= 0)

@@ -53,4 +53,13 @@ public class Bullet : MonoBehaviour
             objectPool.Release(this);
         }
     }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.gameObject.CompareTag("Enemy"))
+        {
+            other.gameObject.GetComponent<HitboxComponent>().Damage(this);
+            objectPool.Release(this);
+        }
+    }
 }

@@ -1150,8 +1150,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   blinkingCount: 7
   blinkInterval: 0.1
-  blinkMaterial: {fileID: 10306, guid: 0000000000000000f000000000000000, type: 0}
-  redFlashMaterial: {fileID: 10306, guid: 0000000000000000f000000000000000, type: 0}
+  blinkMaterial: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
   isInvincible: 0
 --- !u!1 &1710826278
 GameObject:
@@ -1822,6 +1821,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 520281057447390497, guid: c115518bca7436b4b85e8014d837b584, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1251742266688130869, guid: c115518bca7436b4b85e8014d837b584, type: 3}
+      propertyPath: m_BodyType
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6985969096307499515, guid: c115518bca7436b4b85e8014d837b584, type: 3}

@@ -18,7 +18,7 @@ GameObject:
   - component: {fileID: -1360070935725798629}
   m_Layer: 0
   m_Name: EnemyBoss
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -51,7 +51,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd83254e2aa851049b271d082c750f1f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  level: 1
+  level: 4
+  enemySpawner: {fileID: 2122342843909837203, guid: b3284262753f08d41b4d6a7ce6b4df05, type: 3}
 --- !u!114 &341084488055149790
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -64,7 +65,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e72b66ff14623fa49afc1ef53a2db63b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  level: 1
+  level: 4
+  enemySpawner: {fileID: 2122342843909837203, guid: b3284262753f08d41b4d6a7ce6b4df05, type: 3}
   speed: 2
 --- !u!50 &4347331208782175123
 Rigidbody2D:
@@ -174,7 +176,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0.4236111}
@@ -224,6 +226,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2631293714233296356}
     m_Modifications:
+    - target: {fileID: -4706344896335094759, guid: f29a6478528e9ac4a81ec051e2ceb400, type: 3}
+      propertyPath: bullet
+      value: 
+      objectReference: {fileID: 2592301053214127727, guid: 6c1fe8f85a5d50046b281dd556fe7828, type: 3}
     - target: {fileID: -4706344896335094759, guid: f29a6478528e9ac4a81ec051e2ceb400, type: 3}
       propertyPath: parentTransform
       value: 

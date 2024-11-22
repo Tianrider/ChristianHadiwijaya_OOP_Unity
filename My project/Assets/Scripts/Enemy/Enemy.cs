@@ -3,6 +3,7 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
     public int level = 1;
+    public EnemySpawner enemySpawner;
 
     void Awake()
     {
@@ -21,5 +22,10 @@ public class Enemy : MonoBehaviour
         {
             transform.eulerAngles = Vector3.zero;
         }
+    }
+
+    public void OnDestroy()
+    {
+        enemySpawner.OnEnemyKilled();
     }
 }

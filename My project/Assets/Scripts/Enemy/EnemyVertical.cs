@@ -12,7 +12,7 @@ public class EnemyForward : Enemy
         screenHeight = Camera.main.orthographicSize * 2f;
         screenWidth = Camera.main.orthographicSize * Camera.main.aspect * 2f;
 
-        float randomX = Random.Range(-screenWidth / 2f, screenWidth / 2f);
+        float randomX = Random.Range(-screenWidth / 2f + 1, screenWidth / 2f - 1);
 
         // Set posisi enemy
         transform.position = new Vector3(randomX, screenHeight / 2f, transform.position.z);
