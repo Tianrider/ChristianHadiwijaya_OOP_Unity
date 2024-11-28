@@ -12,7 +12,6 @@ public class AttackComponent : MonoBehaviour
 
         if (other.GetComponent<HitboxComponent>() != null)
         {
-            Debug.Log("HitboxComponent found");
             HitboxComponent hitbox = other.GetComponent<HitboxComponent>();
 
             if (bullet != null)
@@ -25,6 +24,7 @@ public class AttackComponent : MonoBehaviour
 
         if (other.GetComponent<InvincibilityComponent>() != null)
         {
+            Debug.Log("InvincibilityComponent found");
             other.GetComponent<InvincibilityComponent>().TriggerInvincibility();
         }
     }

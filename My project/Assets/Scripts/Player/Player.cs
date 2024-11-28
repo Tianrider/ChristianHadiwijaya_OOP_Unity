@@ -8,7 +8,7 @@ public class Player : MonoBehaviour
     private PlayerMovement playerMovement;
     private Animator animator;
 
-    void Awake () 
+    void Awake()
     {
         if (Instance != null && Instance != this)
         {
@@ -24,15 +24,15 @@ public class Player : MonoBehaviour
     void Start()
     {
         playerMovement = GetComponent<PlayerMovement>();
-        animator = GameObject.Find("EngineEffect").GetComponent<Animator>();   
+        animator = GameObject.Find("EngineEffect").GetComponent<Animator>();
     }
 
     void FixedUpdate()
     {
-            playerMovement.move();
+        playerMovement.move();
     }
 
-    void LateUpdate() 
+    void LateUpdate()
     {
         animator.SetBool("IsMoving", playerMovement.isMoving());
     }

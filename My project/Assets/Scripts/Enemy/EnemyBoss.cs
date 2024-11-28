@@ -12,7 +12,7 @@ public class EnemyBoss : Enemy
         float screenHeight = Camera.main.orthographicSize * 2f;
         screenWidth = Camera.main.orthographicSize * Camera.main.aspect * 2f;
 
-        float randomY = Random.Range(-screenHeight / 2f + 5, screenHeight / 2f - 5);
+        float randomY = Random.Range(-screenHeight / 2f + 2, screenHeight / 2f - 2);
 
         // Set posisi enemy
         transform.position = new Vector3(screenWidth / 2f, randomY, transform.position.z);

@@ -1,17 +1,27 @@
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Enemy : MonoBehaviour
 {
-    public int level = 1;
-    public EnemySpawner enemySpawner;
+    [SerializeField] protected int level;
 
-    void Awake()
+    public UnityEvent enemyKilledEvent;
+
+    private void Start()
     {
-        // Disable gravity
-        GetComponent<Rigidbody2D>().gravityScale = 0f;
+        enemyKilledEvent ??= new UnityEvent();
     }
 
-    // Pastikan Enemy menghadap ke arah Player
+    public void SetLevel(int level)
+    {
+        this.level = level;
+    }
+
+    public int GetLevel()
+    {
+        return level;
+    }
+
     public void FacePlayer(Transform playerTransform)
     {
         if (playerTransform.position.x < transform.position.x)
@@ -24,8 +34,8 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    public void OnDestroy()
+    private void OnDestroy()
     {
-        enemySpawner.OnEnemyKilled();
+        enemyKilledEvent.Invoke();
     }
 }

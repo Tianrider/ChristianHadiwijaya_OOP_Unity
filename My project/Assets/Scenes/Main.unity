@@ -282,6 +282,68 @@ MonoBehaviour:
     m_MipBias: 0
     m_VarianceClampScale: 0.9
     m_ContrastAdaptiveSharpening: 0
+--- !u!1 &1184635413
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1184635415}
+  - component: {fileID: 1184635414}
+  - component: {fileID: 1184635416}
+  m_Layer: 5
+  m_Name: UIDocument
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1184635414
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1184635413}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 19102, guid: 0000000000000000e000000000000000, type: 0}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_PanelSettings: {fileID: 11400000, guid: 524a5f845acab3f48bf76c77515a32fc, type: 2}
+  m_ParentUI: {fileID: 0}
+  sourceAsset: {fileID: 9197481963319205126, guid: 5d9104ea8af18f140ac0f1534f0ddfaa, type: 3}
+  m_SortingOrder: 0
+--- !u!4 &1184635415
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1184635413}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1184635416
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1184635413}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d8220325bb39054b9a63f674b217b20, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  combatManager: {fileID: 4962132256540190064}
 --- !u!1001 &1230914395
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -466,7 +528,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   level: 1
-  enemySpawner: {fileID: 0}
+  enemyKilledEvent:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!4 &1670992905
 Transform:
   m_ObjectHideFlags: 0
@@ -567,6 +631,10 @@ PrefabInstance:
       propertyPath: combatManager
       value: 
       objectReference: {fileID: 4962132256540190064}
+    - target: {fileID: 2122342843909837203, guid: b3284262753f08d41b4d6a7ce6b4df05, type: 3}
+      propertyPath: defaultSpawnCount
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4306104344519569511, guid: b3284262753f08d41b4d6a7ce6b4df05, type: 3}
       propertyPath: m_Name
       value: EnemySpawnerBoss
@@ -942,3 +1010,4 @@ SceneRoots:
   - {fileID: 1670992905}
   - {fileID: 2052988159}
   - {fileID: 4962132256540190063}
+  - {fileID: 1184635415}

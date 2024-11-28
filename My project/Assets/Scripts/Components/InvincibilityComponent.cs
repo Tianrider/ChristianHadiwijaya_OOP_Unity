@@ -32,6 +32,8 @@ public class InvincibilityComponent : MonoBehaviour
     {
         isInvincible = true;
 
+        Debug.Log("blinking");
+
         for (int i = 0; i < blinkingCount; i++)
         {
             spriteRenderer.material = blinkMaterial;

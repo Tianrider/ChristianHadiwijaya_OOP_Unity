@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour
@@ -22,45 +21,54 @@ public class EnemySpawner : MonoBehaviour
     public CombatManager combatManager;
 
     public bool isSpawning = false;
-    private int currentWaveEnemyCount = 0;
 
-    public void StartNextWave()
+    private void Start()
     {
-        if (combatManager.waveNumber >= spawnedEnemy.level)
-        {
-            StartCoroutine(SpawnEnemies());
-        }
+        spawnCount = defaultSpawnCount;
     }
 
-    private IEnumerator SpawnEnemies()
+    public void SpawnEnemy()
+    {
+        StartCoroutine(IESpawnEnemy());
+    }
+
+    IEnumerator IESpawnEnemy()
     {
         isSpawning = true;
-        spawnCount = (spawnedEnemy.level <= combatManager.waveNumber) ? defaultSpawnCount : 0;
-        currentWaveEnemyCount = spawnCount;
 
         while (spawnCount > 0)
         {
-            Enemy enemyInstance = Instantiate(spawnedEnemy, transform);
-            enemyInstance.enemySpawner = this;
+            Enemy s = Instantiate(spawnedEnemy);
+
+            s.transform.parent = gameObject.transform;
+
+            s.enemyKilledEvent.AddListener(KillEnemy);
+            s.enemyKilledEvent.AddListener(combatManager.IncreaseKill);
+
             spawnCount--;
+
             yield return new WaitForSeconds(spawnInterval);
         }
 
         isSpawning = false;
     }
 
-    public void OnEnemyKilled()
+    public void ResetSpawnCount()
     {
-        totalKill++;
-        totalKillWave++;
-        currentWaveEnemyCount--;
-
         if (totalKillWave >= minimumKillsToIncreaseSpawnCount)
         {
-            defaultSpawnCount += spawnCountMultiplier;
+            spawnCountMultiplier += multiplierIncreaseCount;
+            minimumKillsToIncreaseSpawnCount *= spawnCountMultiplier;
             totalKillWave = 0;
         }
 
-        combatManager?.OnEnemyKilled(currentWaveEnemyCount);
+        spawnCount = defaultSpawnCount * spawnCountMultiplier;
+    }
+
+    private void KillEnemy()
+    {
+        totalKill++;
+        totalKillWave++;
+        combatManager.points += spawnedEnemy.GetLevel();
     }
 }

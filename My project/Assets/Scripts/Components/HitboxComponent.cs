@@ -19,7 +19,12 @@ public class HitboxComponent : MonoBehaviour
 
     public void Damage(Bullet bullet)
     {
-        if (invincibilityComponent != null && invincibilityComponent.isInvincible) return;
+        Debug.Log("HitboxComponent.Damage() Bullet");
+        if (invincibilityComponent != null && invincibilityComponent.isInvincible)
+        {
+            Debug.Log("HitboxComponent.Damage() is invincible");
+            return;
+        }
 
         if (health != null)
             health.Subtract(bullet.damage);
@@ -27,6 +32,7 @@ public class HitboxComponent : MonoBehaviour
 
     public void Damage(int damage)
     {
+        Debug.Log("HitboxComponent.Damage() int");
         if (invincibilityComponent != null && invincibilityComponent.isInvincible) return;
 
         if (health != null)

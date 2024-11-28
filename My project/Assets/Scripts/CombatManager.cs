@@ -1,51 +1,52 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class CombatManager : MonoBehaviour
 {
     public EnemySpawner[] enemySpawners;
+
     public float timer = 0;
     [SerializeField] private float waveInterval = 5f;
-    public int waveNumber = 0;
-    public int totalEnemies = 0;
-    private bool isWaitingForEnemiesElimination = false;
 
-    private void Update()
+    public int waveNumber = 1;
+
+    public int totalEnemies = 0;
+    public int points = 0;
+
+    private void OnEnable()
     {
-        if (isWaitingForEnemiesElimination)
+        foreach (EnemySpawner spawner in enemySpawners)
         {
-            return;
+            spawner.combatManager = this;
         }
+    }
+
+    private void FixedUpdate()
+    {
+        if (totalEnemies == 0)
+            timer += Time.deltaTime;
 
         if (timer >= waveInterval)
         {
+            foreach (EnemySpawner spawner in enemySpawners)
+            {
+                if (spawner.spawnedEnemy.GetLevel() <= waveNumber && !spawner.isSpawning)
+                {
+                    spawner.ResetSpawnCount();
+
+                    totalEnemies += spawner.spawnCount;
+
+                    spawner.SpawnEnemy();
+                }
+            }
+
             waveNumber++;
             timer = 0;
-            isWaitingForEnemiesElimination = true;
-            NotifySpawners();
-        }
-        else if (totalEnemies <= 0 || waveNumber == 0)
-        {
-            timer += Time.deltaTime;
         }
     }
 
-    private void NotifySpawners()
-    {
-        foreach (var spawner in enemySpawners)
-        {
-            spawner.StartNextWave();
-        }
-    }
-
-    public void OnEnemyKilled(int remainingEnemiesInWave)
+    public void IncreaseKill()
     {
         totalEnemies--;
-
-        if (isWaitingForEnemiesElimination && remainingEnemiesInWave <= 0)
-        {
-            isWaitingForEnemiesElimination = false;
-        }
     }
 }

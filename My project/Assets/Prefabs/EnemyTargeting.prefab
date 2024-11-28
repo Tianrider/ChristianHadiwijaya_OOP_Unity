@@ -50,7 +50,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd83254e2aa851049b271d082c750f1f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  level: 3
+  level: 4
   enemySpawner: {fileID: 2122342843909837203, guid: b3284262753f08d41b4d6a7ce6b4df05, type: 3}
 --- !u!114 &8239065389452648377
 MonoBehaviour:
@@ -64,7 +64,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e40017da192f8a54f8ba4303b9fecd78, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  level: 3
+  level: 4
   enemySpawner: {fileID: 2122342843909837203, guid: b3284262753f08d41b4d6a7ce6b4df05, type: 3}
   speed: 2
 --- !u!50 &1744628879075170218
@@ -114,7 +114,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

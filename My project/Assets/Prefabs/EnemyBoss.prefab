@@ -16,6 +16,8 @@ GameObject:
   - component: {fileID: -6330988940982187964}
   - component: {fileID: 6756485865078206910}
   - component: {fileID: -1360070935725798629}
+  - component: {fileID: 12452949625501259}
+  - component: {fileID: 8146466838498609290}
   m_Layer: 0
   m_Name: EnemyBoss
   m_TagString: Enemy
@@ -51,7 +53,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd83254e2aa851049b271d082c750f1f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  level: 4
+  level: 5
   enemySpawner: {fileID: 2122342843909837203, guid: b3284262753f08d41b4d6a7ce6b4df05, type: 3}
 --- !u!114 &341084488055149790
 MonoBehaviour:
@@ -65,7 +67,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e72b66ff14623fa49afc1ef53a2db63b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  level: 4
+  level: 5
   enemySpawner: {fileID: 2122342843909837203, guid: b3284262753f08d41b4d6a7ce6b4df05, type: 3}
   speed: 2
 --- !u!50 &4347331208782175123
@@ -115,7 +117,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -204,7 +206,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e23bfd943cdcc34396b42a334d29be2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 200
+  maxHealth: 500
 --- !u!114 &-1360070935725798629
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -218,6 +220,36 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: {fileID: 6756485865078206910}
+--- !u!114 &12452949625501259
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8566240679116404252}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5d55483ef415bd4bbaa69f45bbc2c53, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  blinkingCount: 7
+  blinkInterval: 0.1
+  blinkMaterial: {fileID: 2100000, guid: 8d54d1638d1afef40b20018ef46a1fa0, type: 2}
+  isInvincible: 0
+--- !u!114 &8146466838498609290
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8566240679116404252}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a0a2a0888a1f3b408f604fc7bd5fcdd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bullet: {fileID: 8161289511922906386}
+  damage: 0
 --- !u!1001 &1368886057259109257
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -229,7 +261,7 @@ PrefabInstance:
     - target: {fileID: -4706344896335094759, guid: f29a6478528e9ac4a81ec051e2ceb400, type: 3}
       propertyPath: bullet
       value: 
-      objectReference: {fileID: 2592301053214127727, guid: 6c1fe8f85a5d50046b281dd556fe7828, type: 3}
+      objectReference: {fileID: 2592301053214127727, guid: fff05c417225d7141b85529cda002751, type: 3}
     - target: {fileID: -4706344896335094759, guid: f29a6478528e9ac4a81ec051e2ceb400, type: 3}
       propertyPath: parentTransform
       value: 
@@ -268,7 +300,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6896171200408991662, guid: f29a6478528e9ac4a81ec051e2ceb400, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 1.127
       objectReference: {fileID: 0}
     - target: {fileID: 6896171200408991662, guid: f29a6478528e9ac4a81ec051e2ceb400, type: 3}
       propertyPath: m_LocalPosition.z
@@ -316,3 +348,14 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6896171200408991662, guid: f29a6478528e9ac4a81ec051e2ceb400, type: 3}
   m_PrefabInstance: {fileID: 1368886057259109257}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &8161289511922906386 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7187176625814060699, guid: f29a6478528e9ac4a81ec051e2ceb400, type: 3}
+  m_PrefabInstance: {fileID: 1368886057259109257}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c63267305438b648bd73f0620960ef3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

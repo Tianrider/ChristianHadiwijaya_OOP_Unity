@@ -34,6 +34,7 @@ public class EnemyClickSpawner : MonoBehaviour
 
 
 
+
     private void SpawnEnemy()
     {
         if (selectedVariant < enemyVariants.Length)

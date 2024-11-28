@@ -1,0 +1,5 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <ui:VisualElement name="VisualElement" style="flex-grow: 1; height: 20px; margin-top: 20px;">
+        <ui:Label tabindex="-1" text="Game Tembak-Tembakan" parse-escape-sequences="true" display-tooltip-when-elided="true" style="flex-wrap: nowrap; -unity-text-align: upper-center; color: rgb(255, 255, 255); font-size: 20px; -unity-font-style: bold; -unity-font: url(&quot;project://database/Library/unity%20default%20resources?fileID=10102&amp;guid=0000000000000000e000000000000000&amp;type=0#LegacyRuntime&quot;); margin-top: 4px;" />
+    </ui:VisualElement>
+</ui:UXML>
